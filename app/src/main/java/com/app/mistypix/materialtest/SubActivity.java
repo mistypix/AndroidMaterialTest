@@ -43,7 +43,7 @@ public class SubActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id=item.getItemId();
         if(id==R.id.action_settings){
-            Log.d("MYTAG","inside onOptionsItemSelected of SubActivity class");
+            Log.d("MYTAG","inside onOptionsItemSelected of SubActivity class edited from github.");
             return true;
         }
 
