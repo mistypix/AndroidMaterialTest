@@ -7,17 +7,26 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.lucasr.dspec.DesignSpec;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class NavigationDrawerFragment extends Fragment {
+
+    private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     public static final String PREF_FILE_NAME="drawerHistory";
@@ -25,6 +34,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
     private View drawerView;
+    private MyAdapter adapter;
 
 
 
@@ -47,10 +57,30 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+         View layout=inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        recyclerView=(RecyclerView)layout.findViewById(R.id.drawerList);
+        adapter=new MyAdapter(getActivity(),getData());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        return layout;
     }
 
 
+    public static List<Information> getData(){
+        List<Information> data=new ArrayList<>();
+        int[] icons={R.drawable.ic_launcher1,R.drawable.ic_launcher2,R.drawable.ic_launcher3,R.drawable.ic_launcher4,R.drawable.ic_launcher5,R.drawable.ic_launcher6};
+        String[] titles={"hi","this","is","vikrant","from","mistypix studios"};
+
+        for(int i=0;i<icons.length && i<titles.length;i++){
+            Information current=new Information();
+            current.itemId=icons[i];
+            current.text=titles[i];
+            data.add(current);
+        }
+
+        return data;
+    }
 
 
 
@@ -79,14 +109,17 @@ public class NavigationDrawerFragment extends Fragment {
         public void onDrawerSlide(View drawerView, float slideOffset){
 
                     Log.d("MYTAG","slideOffset: "+slideOffset);
+                if(slideOffset<0.6){
                     toolbar.setAlpha(1-slideOffset);
-                    mDrawerLayout.findViewById(R.id.main_content).setAlpha((float)1.5-slideOffset);
+
+                }
+
 
             }
         };
 
         if(!mUserLearnedDrawer && !mFromSavedInstanceState){
-            mDrawerLayout.openDrawer(mDrawerLayout);
+            mDrawerLayout.openDrawer(drawerView);
         }
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);

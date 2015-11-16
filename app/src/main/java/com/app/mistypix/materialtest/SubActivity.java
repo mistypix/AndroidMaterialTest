@@ -18,7 +18,7 @@ public class SubActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub);
+        setContentView(R.layout.content_sub);
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar2);
         setSupportActionBar(toolbar);
 
@@ -27,7 +27,7 @@ public class SubActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         DrawerLayout drawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
-        drawerLayout.setBackgroundColor(Color.parseColor("#cdfddc"));
+        //drawerLayout.setBackgroundColor(Color.parseColor("#cdfddc"));
 
         NavigationDrawerFragment drawerFragment=(NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer,(DrawerLayout)findViewById(R.id.drawer_layout),toolbar);

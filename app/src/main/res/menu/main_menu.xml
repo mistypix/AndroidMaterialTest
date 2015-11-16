@@ -10,6 +10,5 @@
         android:title="@string/next"
         android:orderInCategory="200"
         app:showAsAction="always"
-       android:background="#dcc"/>
-        <!-- android:icon="@drawable/logo2" -->
+        android:background="#dcc"/>
 </menu>
